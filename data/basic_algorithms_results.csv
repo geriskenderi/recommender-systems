@@ -1,0 +1,5 @@
+,Recommender,RMSE,MAE
+0,ML100K-Random,1.518.,1.220.
+1,PDA2018-Random,1.481.,1.184.
+2,ML100-Baseline,0.941.,0.743.
+3,PDA-Baseline,0.903.,0.711.

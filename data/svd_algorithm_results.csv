@@ -1,0 +1,3 @@
+,Recommender,RMSE,MAE
+0,ML100-SVD,0.963.,0.765.
+1,PDA-SVD,0.912.,0.720.
