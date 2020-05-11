@@ -16,11 +16,12 @@ scikit-surprise = "*"
 tabulate = "*"
 matplotlib = "*"
 pydot = "*"
-tensorflow = "*"
 keras = "*"
 graphviz = "*"
 tqdm = "*"
+tensorflow = "==1.15.2"
 cornac = "*"
+ipywidgets = "*"
 
 [requires]
 python_version = "3.7"
