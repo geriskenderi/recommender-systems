@@ -1,9 +1,9 @@
 ,Recommender,RMSE,MAE
 0,ML100-Random,1.519.,1.219.
 1,ML100-GlobalMean,1.126.,0.945.
-2,ML100-UserMean,1.208.,0.972.
-3,ML100-ItemMean,1.278.,1.035.
-4,PDA2018-Random,1.483.,1.186.
+2,ML100-UserMean,1.202.,0.969.
+3,ML100-ItemMean,1.285.,1.035.
+4,PDA2018-Random,1.480.,1.185.
 5,PDA2018-GlobalMean,1.100.,0.911.
-6,PDA2018-UserMean,1.136.,0.931.
-7,PDA2018-ItemMean,1.290.,1.045.
+6,PDA2018-UserMean,1.133.,0.928.
+7,PDA2018-ItemMean,1.291.,1.044.
