@@ -86,18 +86,19 @@ Below follow the results of our work for this project.
 
 
 ### Item Recommendation
-| Recommender | Pre@5 | Pre@10 | Rec@5 | Rec@10 | NDCG | LibRec Pre@5 | LibRec Pre@10 | LibRec Rec@5 | LibRec Rec@10 | LibRec NDCG |
-|:------------|:---------|:---------|:---------|:---------|:---------|:---------|:---------|:---------|:---------|:---------|:---------|
-| ML100-MostPop | 0.097 | 0.089 | 0.044 | 0.083 | 0.000 | 0.211 | 0.190 | 0.070 | 0.116 | 0.477 |
-| ML100-UserKNN | 0.359 | 0.366 | 0.321 | 0.476 | 0.719 | 0.338 | 0.180 | 0.138 | 0.182 | 0.554 |
-| ML100-ItemKNN | 0.360 | 0.360 | 0.312 | 0.465 | 0.733 | 0.318 | 0.260 | 0.103 | 0.164 | 0.536 |
-| ML100-BPR | 0.119 | 0.115 | 0.063 | 0.115 | 0.405632 | 0.378 | 0.321 | 0.129 | 0.209 | 0.601 |
-| ML100-NCF | 0.116 | 0.108 | 0.059 | 0.103 | 0.000 | - | - | - | - | - | - |
-| PDA2018-MostPop | 0.074 | 0.069 | 0.032 | 0.068 | 0.349 | - | - | - | - | - |
-| PDA2018-UserKNN | 0.361 | 0.360 | 0.316 | 0.469 | 0.723 | - | - | - | - | - |
-| PDA2018-ItemKNN | 0.353 | 0.354 | 0.320 | 0.468 | 0.732 | - | - | - | - | - |
-| PDA2018-BPR | 0.095 | 0.089 | 0.053 | 0.096 | 0.390 | - | - | - | - | - |
-| PDA2018-NCF | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | - | - | - | - | - |
+
+| Recommender     |     Pre@5 |    Pre@10 |     Rec@5 |    Rec@10 |     NDCG | LibRec Pre@5 | LibRec Pre@10 | LibRec Rec@5 | LibRec Rec@10 | LibRec NDCG |
+|:----------------|:----------|:----------|:----------|:----------|:---------|:-------------|:--------------|:-------------|:--------------|:------------|
+| ML100-MostPop   | 0.0945802 | 0.0886291 | 0.0431486 | 0.0799196 | 0.405632 | 0.211 | 0.190 | 0.070 | 0.116 | 0.477 |
+| ML100-UserKNN   | 0.353387  | 0.360161  | 0.320818  | 0.477432  | 0.719624 | 0.338 | 0.280 | 0.116 | 0.182 | 0.554 |
+| ML100-ItemKNN   | 0.345903  | 0.348597  | 0.306494  | 0.452833  | 0.733329 | 0.318 | 0.260 | 0.103 | 0.164 | 0.536 |
+| ML100-BPR       | 0.12051   | 0.113815  | 0.067483  | 0.119924  | 0.460105 | 0.378 | 0.321 | 0.129 | 0.209 | 0.601 |
+| ML100-NCF       | 0.10627   | 0.103932  | 0.0532409 | 0.0997437 | 0.429081 | - | - | - | - | - |
+| PDA2018-MostPop | 0.0739311 | 0.0701476 | 0.0394338 | 0.0697588 | 0.348685 | - | - | - | - | - |
+| PDA2018-UserKNN | 0.345392  | 0.358295  | 0.302015  | 0.459918  | 0.729926 | - | - | - | - | - |
+| PDA2018-ItemKNN | 0.352242  | 0.354596  | 0.315589  | 0.458352  | 0.732392 | - | - | - | - | - |
+| PDA2018-BPR     | 0.0954975 | 0.09056   | 0.0547475 | 0.101405  | 0.390186 | - | - | - | - | - |
+| PDA2018-NCF     | 0.0897465 | 0.0839955 | 0.0511921 | 0.0935042 | 0.379135 | - | - | - | - | - |
 
 
 #### Comments on the tasks and our results
@@ -105,7 +106,7 @@ Below follow the results of our work for this project.
 
 - Surely doubt will arise when looking at the item recommendation task. The most difficult implementation was the KNN CF for Top-N, because we had to understand how the Surprise library was using the KNN algorithm to predict the values and try to extract a ranking from that. In the end we managed to get valid precision values, but the Recall and NDCG values are very high. We believe this is because in the computation of these metrics we are not excluding unknowns and for NDCG in particular, we also didn't exclude the items that were already in the test set. For the KNN Item Recommendation the evaluation algorithms were implemented from scratch and this also might contribute to the error. We are not quite sure about the correctness of our evaluation algorithms, especially the NDCG.
 
-- The third and final point is about the other recommender algorithms implemented in Cornac like MostPop, BPR and NCF. The metric values are very low and they might seem wrong, but they are not really wrong. It's the Cornac evaluation policy that makes them seem unusable. Actually, we can see from the results in the table that the trends are captured. Precision decreses for greater values of k, Recall increases for greater values of k and the metrics show how BPR is the better approach when it comes to ranking. Here is  [an issue from the official Cornac repository](https://github.com/PreferredAI/cornac/issues/323) that discusses the topic of low metric values. Also [this one](https://github.com/PreferredAI/cornac/issues/324). You can also see in the code that the AUC values for all the models (we used the AUC metric in the code but didn't export it for evaluation) shows good results with BPR-AUC > NCF-AUC > MostPop-AUC
+- The third and final point is about the other recommender algorithms implemented in Cornac like MostPop, BPR and NCF. The metric values are very low and they might seem wrong, but they are not really wrong. It's the Cornac evaluation policy that makes them seem unusable. Actually, we can see from the results in the table that the trends are captured. Precision decreses for greater values of k, Recall increases for greater values of k and the metrics show how BPR is the better approach when it comes to ranking. Here is  [an issue from the official Cornac repository](https://github.com/PreferredAI/cornac/issues/323) that discusses the topic of low metric values. Also [this one](https://github.com/PreferredAI/cornac/issues/324). You can also see in the code that the AUC values for all the models (we used the AUC metric in the code but didn't export it for evaluation) shows good results with BPR-AUC > NCF-AUC > MostPop-AUC. Again, we haven't exported the AUC values in the tables here, but you can see them and how they evolved during training in the [final_notebooks](final_notebooks/)
 
 
 ## Project structure
@@ -127,8 +128,8 @@ There are 4 directories that make up this project:
 The code inside the notebooks is well documented and understandable. Because we use two libraries, the evaluation procedures are straightforward and are also done in the same way (with the exception of the KNNCF for Item Recommendation which is not evaluated in Cornac unlike all the other Item Recommendation models).
 
 ## Project requirements
-1. **Performing Grid-Search**: To see the various Grid Search runs (valid for points 1.1 and 2.1) you can check out the single algorithm implementations in the [notebooks](notebooks/) directory. When single-handidly studying the algorithms we performed Grid search for hyperparameter tuning on most of them, while also running cross validation afterwards.
-2. **Performing Grid-Search**: To see the results of the recommender algorithms you can check out the complete implementations in the [final_notebooks](final_notebooks/) directory. The wrap up all the algorithms (divided by purpose as mentioned before) in one place and that's where the results in the two tables from [Results](#results) come from.
+1. **Performing Grid-Search (points 1.1 and 2.1)**: To see the various Grid Search runs you can check out the single algorithm implementations in the [notebooks](notebooks/) directory. When single-handidly studying the algorithms we performed Grid search for hyperparameter tuning on most of them, while also running cross validation afterwards.
+2. **Results of Prediction and Recommendation (1.2 and 2.2)**: To see the results of the recommender algorithms you can check out the complete implementations in the [final_notebooks](final_notebooks/) directory. They wrap up all the algorithms (divided by purpose as mentioned before) in one place and that's where the results in the two tables from our [Results](#results) table come from.
 
 
 ## Images
