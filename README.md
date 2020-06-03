@@ -113,7 +113,7 @@ Below follow the results of our work for this project.
 There are 4 directories that make up this project:
 
 1. **data**: This directory contains the movielens and PDA data as well as the results of our experiments in csv format
-2. **implementations_from_scratch**: In here you can find our from-scratch implementations of some of the algorithms that we used. It was useful for us to see and understand how the algorithms and recommendation techniques worked on a low level before moving on to using various libraries.
+2. **implementations_from_scratch**: In here you can find our from-scratch implementations of some of the algorithms that we used. It was useful for us to see and understand how the algorithms and recommendation techniques worked on a low level before moving on to using various libraries. The varous implementations include two KNN collaborative filtering algorithms (user and item based), an implementation of Matrix Factorization, Neural Collaborative Filtering and BPR based on Keras:
 3. **notebooks**: This directory contains the code divided by the category of the algorithms that we have used in this project. In each notebook there is a detailed implementation along with evaluation and most importantly **Grid Search** for the bigger models:
    1. Basic-Algorithms: Code for Random Predictios, User, Item and Global Mean Predictors using [Surprise](https://github.com/NicolasHug/Surprise)
    2. Bayesian-Personalized-Ranking: Implementation of BPR using [Cornac](https://github.com/PreferredAI/cornac)
@@ -126,6 +126,9 @@ There are 4 directories that make up this project:
    2. **Item-Recommendation**: In this notebook you can run and experiment with all the *Item Recommendation* algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another.
 
 The code inside the notebooks is well documented and understandable. Because we use two libraries, the evaluation procedures are straightforward and are also done in the same way (with the exception of the KNNCF for Item Recommendation which is not evaluated in Cornac unlike all the other Item Recommendation models).
+
+Here is a visual tree representation of the directories: 
+![alt-text](images/dir_tree.png "Logo Title Text 1")
 
 ## Project requirements
 1. **Performing Grid-Search (points 1.1 and 2.1)**: To see the various Grid Search runs you can check out the single algorithm implementations in the [notebooks](notebooks/) directory. When single-handidly studying the algorithms we performed Grid search for hyperparameter tuning on most of them, while also running cross validation afterwards.
