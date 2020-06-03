@@ -138,12 +138,24 @@ Here is a visual tree representation of the directories:
 ## Images
 E.g of a NCF run on Movielens 100K: 
 
-![alt-text](images/ml_ncf_results.png "Logo Title Text 1")
+![alt-text](images/ml_ncf_results.png "NCF run")
 
 E.g of a BPR run on Movielens 100K: 
 
-![alt-text](images/ml_bpr_results.png "Logo Title Text 1")
+![alt-text](images/ml_bpr_results.png "BPR run")
 
-E.g of a Precision and Recall graph for BPR and MostPop: 
+Precision and Recall graph: BPR vs MostPop: 
 
-![alt-text](images/Precision%20and%20recall.png "Logo Title Text 1")
+![alt-text](images/Precision%20and%20recall.png "BPR vs MostPop precison recall")
+
+![alt-text](images/rmse.png "BPR vs MostPop precison recall")
+
+![alt-text](images/mae.png "BPR vs MostPop precison recall")
+
+![alt-text](images/acc_vs.png "BPR vs MostPop precison recall")
+
+![alt-text](images/prec.png "BPR vs MostPop precison recall")
+
+![alt-text](images/rec.png "BPR vs MostPop precison recall")
+
+![alt-text](images/ndcg.png "BPR vs MostPop precison recall")
