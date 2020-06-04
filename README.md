@@ -11,8 +11,9 @@ Evalutation and usage of various Rating prediction and Item Recommendation algor
     - [Installing the required packages](#installing-the-required-packages)
   - [Project structure](#project-structure)
   - [Results](#results)
-    - [Rating Prediction](#rating-prediction)
-    - [Item Recommendation](#item-recommendation)
+    - [Rating Prediction (using Surprise)](#rating-prediction-using-surprise)
+    - [Item Recommendation (using Cornac)](#item-recommendation-using-cornac)
+    - [Item Recommendation (using our mixed Implementations)](#item-recommendation-using-our-mixed-implementations)
       - [Comments on the tasks and our results](#comments-on-the-tasks-and-our-results)
   - [Project structure](#project-structure-1)
   - [Project requirements](#project-requirements)
@@ -63,7 +64,7 @@ The code inside the notebooks is well documented and understandable. Because we 
 We have denoted the movielens dataset as ML100 and the PDA dataset as PDA2018.
 Below follow the results of our work for this project. 
 
-### Rating Prediction
+### Rating Prediction (using Surprise)
    
 | Recommender        | RMSE  | MAE   | LibRec RMSE  | LibRec MAE   | 
 |:-------------------|:------|:------|:-------------|:-------------|
@@ -85,28 +86,33 @@ Below follow the results of our work for this project.
 | PDA2018-SVDpp      | 0.873 | 0.677 | -            | -            |
 
 
-### Item Recommendation
+### Item Recommendation (using Cornac)
 
-| Recommender     |     Pre@5 |    Pre@10 |     Rec@5 |    Rec@10 |     NDCG | LibRec Pre@5 | LibRec Pre@10 | LibRec Rec@5 | LibRec Rec@10 | LibRec NDCG |
-|:----------------|:----------|:----------|:----------|:----------|:---------|:-------------|:--------------|:-------------|:--------------|:------------|
-| ML100-MostPop   | 0.0945802 | 0.0886291 | 0.0431486 | 0.0799196 | 0.405632 | 0.211 | 0.190 | 0.070 | 0.116 | 0.477 |
-| ML100-UserKNN   | 0.353387  | 0.360161  | 0.320818  | 0.477432  | 0.719624 | 0.338 | 0.280 | 0.116 | 0.182 | 0.554 |
-| ML100-ItemKNN   | 0.345903  | 0.348597  | 0.306494  | 0.452833  | 0.733329 | 0.318 | 0.260 | 0.103 | 0.164 | 0.536 |
-| ML100-BPR       | 0.12051   | 0.113815  | 0.067483  | 0.119924  | 0.460105 | 0.378 | 0.321 | 0.129 | 0.209 | 0.601 |
-| ML100-NCF       | 0.10627   | 0.103932  | 0.0532409 | 0.0997437 | 0.429081 | - | - | - | - | - |
-| PDA2018-MostPop | 0.0739311 | 0.0701476 | 0.0394338 | 0.0697588 | 0.348685 | - | - | - | - | - |
-| PDA2018-UserKNN | 0.345392  | 0.358295  | 0.302015  | 0.459918  | 0.729926 | - | - | - | - | - |
-| PDA2018-ItemKNN | 0.352242  | 0.354596  | 0.315589  | 0.458352  | 0.732392 | - | - | - | - | - |
-| PDA2018-BPR     | 0.0954975 | 0.09056   | 0.0547475 | 0.101405  | 0.390186 | - | - | - | - | - |
-| PDA2018-NCF     | 0.0897465 | 0.0839955 | 0.0511921 | 0.0935042 | 0.379135 | - | - | - | - | - |
+| Recommender     | Pre@5 | Pre@10 | Rec@5 | Rec@10 | NDCG |
+|:----------------|:-------|:-------|:-------|:-------|:-------|
+| ML100-MostPop   | 0.0945 | 0.0886 | 0.0431 | 0.0799 | 0.4056 |
+| ML100-UserKNN   | 0.0002 | 0.0005 | 0.0002 | 0.0004 | 0.2856 |
+| ML100-ItemKNN   | 0.0008 | 0.0010 | 0.0007 | 0.0017 | 0.2701 |
+| ML100-BPR       | 0.1202 | 0.1131 | 0.0634 | 0.1188 | 0.4578 |
+| PDA2018-MostPop | 0.0739 | 0.0701 | 0.0394 | 0.0697 | 0.3486 |
+| PDA2018-UserKNN | 0.0002 | 0.0014 | 0.0004 | 0.0031 | 0.2625 |
+| PDA2018-ItemKNN | 0.0046 | 0.0054 | 0.0014 | 0.0033 | 0.2473 |
+| PDA2018-BPR     | 0.0962 | 0.0881 | 0.0569 | 0.1009 | 0.3904 |
+
+
+
+### Item Recommendation (using our mixed Implementations)
+
+| Recommender     | Pre@5 | Pre@10 | Rec@5 | Rec@10 | NDCG |
+|:----------------|:------|:------|:------|:------|:------|
+| ML100-UserKNN   | 0.353 | 0.360 | 0.320 | 0.477 | 0.719 |
+| ML100-ItemKNN   | 0.345 | 0.348 | 0.306 | 0.452 | 0.733 |
 
 
 #### Comments on the tasks and our results
 - As it can be seen from the tables above the rating prediction task was successful. The implementations here worked well and by tweaking the libraries we obtained great results.
 
-- Surely doubt will arise when looking at the item recommendation task. The most difficult implementation was the KNN CF for Top-N, because we had to understand how the Surprise library was using the KNN algorithm to predict the values and try to extract a ranking from that. In the end we managed to get valid precision values, but the Recall and NDCG values are very high. We believe this is because in the computation of these metrics we are not excluding unknowns and for NDCG in particular, we also didn't exclude the items that were already in the test set. For the KNN Item Recommendation the evaluation algorithms were implemented from scratch and this also might contribute to the error. We are not quite sure about the correctness of our evaluation algorithms, especially the NDCG.
-
-- The third and final point is about the other recommender algorithms implemented in Cornac like MostPop, BPR and NCF. The metric values are very low and they might seem wrong, but they are not really wrong. It's the Cornac evaluation policy that makes them seem unusable. Actually, we can see from the results in the table that the trends are captured. Precision decreses for greater values of k, Recall increases for greater values of k and the metrics show how BPR is the better approach when it comes to ranking. Here is  [an issue from the official Cornac repository](https://github.com/PreferredAI/cornac/issues/323) that discusses the topic of low metric values. Also [this one](https://github.com/PreferredAI/cornac/issues/324). You can also see in the code that the AUC values for all the models (we used the AUC metric in the code but didn't export it for evaluation) shows good results with BPR-AUC > NCF-AUC > MostPop-AUC. Again, we haven't exported the AUC values in the tables here, but you can see them and how they evolved during training in the [final_notebooks](final_notebooks/)
+- Surely doubt will arise when looking at the item recommendation results from Cornac. The metric values are very low and they might seem wrong, but they actually aren't. It's the Cornac evaluation policy that makes them seem wrong. Actually, we can see from the results in the table that the trends are correct and valid. Precision decreses for greater values of k, Recall increases for greater values of k and BPR is the better approach when it comes to ranking. Here is  [an issue from the official Cornac repository](https://github.com/PreferredAI/cornac/issues/323) that discusses the topic of low metric values. Also [this one](https://github.com/PreferredAI/cornac/issues/324). You can also see in the code that the AUC values for all the models (we used the AUC metric in the code but didn't export it for evaluation) shows good results with BPR-AUC > NCF-AUC > MostPop-AUC. Again, we haven't exported the AUC values in the tables here, but you can see them and how they evolved during training in the [final_notebooks](final_notebooks/)
 
 
 ## Project structure
@@ -121,7 +127,7 @@ There are 4 directories that make up this project:
    4. KNNCF-Recommendations: Code for KNN Collaborative Filtering algorithms, used for *Item Recommendation*. Implemented using [Surprise](https://github.com/NicolasHug/Surprise)
    5. Bayesian-Personalized-Ranking: Implementation of NCF/NeuMF using [Cornac](https://github.com/PreferredAI/cornac)
    6. SVD: Implementation of SVD, a Matrix Factorization algorithms. Contains also code for SVD++. Implemented using [Surprise](https://github.com/NicolasHug/Surprise)
-4. **final_notebooks**: This directory contains two notebooks, which contain the code for running all the different models, based on the task they were created for.
+4. **final_notebooks**: This directory contains three notebooks, one is just to create the charts you can see in the [images](#images) section and the other two contain the code for running all the different models, based on the task they were created for.
    1. **Rating-Prediction**: In this notebook you can run and experiment with all the *Rating Prediction* algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another.
    2. **Item-Recommendation**: In this notebook you can run and experiment with all the *Item Recommendation* algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another.
 
