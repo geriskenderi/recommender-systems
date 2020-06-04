@@ -88,7 +88,7 @@ Below follow the results of our work for this project.
 
 ### Item Recommendation (using Cornac)
 
-| Recommender     | Pre@5 | Pre@10 | Rec@5 | Rec@10 | NDCG |
+| Recommender     | Pre@5  | Pre@10 | Rec@5  | Rec@10 | NDCG   |
 |:----------------|:-------|:-------|:-------|:-------|:-------|
 | ML100-MostPop   | 0.0945 | 0.0886 | 0.0431 | 0.0799 | 0.4056 |
 | ML100-UserKNN   | 0.0002 | 0.0005 | 0.0002 | 0.0004 | 0.2856 |
@@ -103,10 +103,10 @@ Below follow the results of our work for this project.
 
 ### Item Recommendation (using our mixed Implementations)
 
-| Recommender     | Pre@5 | Pre@10 | Rec@5 | Rec@10 | NDCG |
-|:----------------|:------|:------|:------|:------|:------|
-| ML100-UserKNN   | 0.353 | 0.360 | 0.320 | 0.477 | 0.719 |
-| ML100-ItemKNN   | 0.345 | 0.348 | 0.306 | 0.452 | 0.733 |
+| Recommender     | Pre@5 | Pre@10 | Rec@5 | Rec@10 | NDCG  |
+|:----------------|:------|:-------|:------|:-------|:------|
+| ML100-UserKNN   | 0.353 | 0.360  | 0.320 | 0.477  | 0.719 |
+| ML100-ItemKNN   | 0.345 | 0.348  | 0.306 | 0.452  | 0.733 |
 
 
 #### Comments on the tasks and our results
