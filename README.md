@@ -13,7 +13,7 @@ Evalutation and usage of various Rating prediction and Item Recommendation algor
   - [Results](#results)
     - [Rating Prediction (using Surprise)](#rating-prediction-using-surprise)
     - [Item Recommendation (using Cornac)](#item-recommendation-using-cornac)
-    - [Item Recommendation (using our mixed Implementations)](#item-recommendation-using-our-mixed-implementations)
+    - [KNN Item Recommendation (using Surprise + our own metric functions)](#knn-item-recommendation-using-surprise--our-own-metric-functions)
       - [Comments on the tasks and our results](#comments-on-the-tasks-and-our-results)
   - [Project structure](#project-structure-1)
   - [Project requirements](#project-requirements)
@@ -101,7 +101,7 @@ Below follow the results of our work for this project.
 
 
 
-### Item Recommendation (using our mixed Implementations)
+### KNN Item Recommendation (using Surprise + our own metric functions)
 
 | Recommender     | Pre@5 | Pre@10 | Rec@5 | Rec@10 | NDCG  |
 |:----------------|:------|:-------|:------|:-------|:------|
