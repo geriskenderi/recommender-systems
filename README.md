@@ -12,10 +12,9 @@ Evalutation and usage of various Rating prediction and Item Recommendation algor
   - [Project structure](#project-structure)
   - [Results](#results)
     - [Rating Prediction (using Surprise)](#rating-prediction-using-surprise)
-    - [Item Recommendation (using Cornac)](#item-recommendation-using-cornac)
-    - [KNN Item Recommendation (using Surprise + our own metric functions)](#knn-item-recommendation-using-surprise--our-own-metric-functions)
+    - [KNN Item Recommendation (using Surprise + our evaluation metric functions)](#knn-item-recommendation-using-surprise--our-evaluation-metric-functions)
+    - [Item Recommendation (using Cornac + Microsoft reco_utils)](#item-recommendation-using-cornac--microsoft-reco_utils)
       - [Comments on the tasks and our results](#comments-on-the-tasks-and-our-results)
-  - [Project structure](#project-structure-1)
   - [Project requirements](#project-requirements)
   - [Images](#images)
 
@@ -46,7 +45,7 @@ You can check examples and other commands you can use with pipenv by simply runn
 There are 4 directories that make up this project:
 
 1. **data**: This directory contains the movielens and PDA data as well as the results of our experiments in csv format
-2. **implementations_from_scratch**: In here you can find our from-scratch implementations of some of the algorithms that we used. It was useful for us to see and understand how the algorithms and recommendation techniques worked on a low level before moving on to using various libraries.
+2. **implementations_from_scratch**: In here you can find our from-scratch implementations of some of the algorithms that we used. It was useful for us to see and understand how the algorithms and recommendation techniques worked on a low level before moving on to using various libraries. The varous implementations include two KNN collaborative filtering algorithms (user and item based), an implementation of Matrix Factorization, Neural Collaborative Filtering and BPR based on Keras:
 3. **notebooks**: This directory contains the code divided by the category of the algorithms that we have used in this project. In each notebook there is a detailed implementation along with evaluation and most importantly **Grid Search** for the bigger models:
    1. Basic-Algorithms: Code for Random Predictios, User, Item and Global Mean Predictors using [Surprise](https://github.com/NicolasHug/Surprise)
    2. Bayesian-Personalized-Ranking: Implementation of BPR using [Cornac](https://github.com/PreferredAI/cornac)
@@ -54,11 +53,12 @@ There are 4 directories that make up this project:
    4. KNNCF-Recommendations: Code for KNN Collaborative Filtering algorithms, used for *Item Recommendation*. Implemented using [Surprise](https://github.com/NicolasHug/Surprise)
    5. Bayesian-Personalized-Ranking: Implementation of NCF/NeuMF using [Cornac](https://github.com/PreferredAI/cornac)
    6. SVD: Implementation of SVD, a Matrix Factorization algorithms. Contains also code for SVD++. Implemented using [Surprise](https://github.com/NicolasHug/Surprise)
-4. **final_notebooks**: This directory contains two notebooks, which contain the code for running all the different models, based on the task they were created for.
+4. **final_notebooks**: This directory contains three notebooks, one is just to create the charts you can see in the [images](#images) section and the other two contain the code for running all the different models, based on the task they were created for.
    1. **Rating-Prediction**: In this notebook you can run and experiment with all the *Rating Prediction* algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another.
-   2. **Item-Recommendation**: In this notebook you can run and experiment with all the *Item Recommendation* algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another.
+   2. **KNN-Item-Recommendation-Surprise**: In this notebook you can run and experiment with all KNN Top-N Recommender algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another.
+   3. **Item-Recommendation_Cornac**: In this notebook you can run and experiment with all the Item Recommendation except *KNN Recommenders* algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another. For our final implementations with we also decided to power up Cornac with the very hand [Microsoft Recommender Utilities](https://github.com/microsoft/recommenders/tree/master/reco_utils).
 
-The code inside the notebooks is well documented and understandable. Because we use two libraries, the evaluation procedures are straightforward and are also done in the same way (with the exception of the KNNCF for Item Recommendation which is not evaluated in Cornac unlike all the other Item Recommendation models).
+The code inside the notebooks is well documented and understandable. The use of libraries allowed us to perform the evaluation procedures in the same place for the different classes of algorithms (with the exception of the KNNCF for Item Recommendation which is not implemented and evaluated with Cornac unlike the other Item Recommendation models).
 
 ## Results
 We have denoted the movielens dataset as ML100 and the PDA dataset as PDA2018.
@@ -86,55 +86,32 @@ Below follow the results of our work for this project.
 | PDA2018-SVDpp      | 0.873 | 0.677 | -            | -            |
 
 
-### Item Recommendation (using Cornac)
+### KNN Item Recommendation (using Surprise + our evaluation metric functions)
 
-| Recommender     | Pre@5  | Pre@10 | Rec@5  | Rec@10 | NDCG   |
-|:----------------|:-------|:-------|:-------|:-------|:-------|
-| ML100-MostPop   | 0.0945 | 0.0886 | 0.0431 | 0.0799 | 0.4056 |
-| ML100-UserKNN   | 0.0002 | 0.0005 | 0.0002 | 0.0004 | 0.2856 |
-| ML100-ItemKNN   | 0.0008 | 0.0010 | 0.0007 | 0.0017 | 0.2701 |
-| ML100-BPR       | 0.1202 | 0.1131 | 0.0634 | 0.1188 | 0.4578 |
-| PDA2018-MostPop | 0.0739 | 0.0701 | 0.0394 | 0.0697 | 0.3486 |
-| PDA2018-UserKNN | 0.0002 | 0.0014 | 0.0004 | 0.0031 | 0.2625 |
-| PDA2018-ItemKNN | 0.0046 | 0.0054 | 0.0014 | 0.0033 | 0.2473 |
-| PDA2018-BPR     | 0.0962 | 0.0881 | 0.0569 | 0.1009 | 0.3904 |
+| Recommender     |    Pre@5 |   Pre@10 |    Rec@5 |   Rec@10 |   NDCG@5 |   NDCG@10 |
+|:----------------|---------:|---------:|---------:|---------:|---------:|----------:|
+| ML100-UserKNN   | 0.353187 | 0.34989  | 0.316283 | 0.463249 | 0.678307 |  0.640064 |
+| ML100-ItemKNN   | 0.341703 | 0.385859 | 0.322389 | 0.515305 | 0.501535 |  0.481618 |
+| PDA2018-UserKNN | 0.345692 | 0.346674 | 0.314428 | 0.463595 | 0.659795 |  0.659795 |
+| PDA2018-ItemKNN | 0.336127 | 0.379209 | 0.312074 | 0.505894 | 0.501431 |  0.490198 |
 
+### Item Recommendation (using Cornac + Microsoft reco_utils)
 
-
-### KNN Item Recommendation (using Surprise + our own metric functions)
-
-| Recommender     | Pre@5 | Pre@10 | Rec@5 | Rec@10 | NDCG  |
-|:----------------|:------|:-------|:------|:-------|:------|
-| ML100-UserKNN   | 0.353 | 0.360  | 0.320 | 0.477  | 0.719 |
-| ML100-ItemKNN   | 0.345 | 0.348  | 0.306 | 0.452  | 0.733 |
+| Recommender     |    Pre@5 |   Pre@10 |     Rec@5 |   Rec@10 |   NDCG@5 |   NDCG@10 |
+|:----------------|---------:|---------:|----------:|---------:|---------:|----------:|
+| ML100-MostPop   | 0.21617  | 0.192553 | 0.0706593 | 0.114259 | 0.2305   |  0.220767 |
+| ML100-BPR       | 0.375957 | 0.323298 | 0.119843  | 0.195291 | 0.400388 |  0.378122 |
+| ML100-NCF       | 0.254255 | 0.237234 | 0.0839873 | 0.152258 | 0.269076 |  0.270284 |
+| PDA2018-MostPop | 0.21617  | 0.192553 | 0.0706593 | 0.114259 | 0.2305   |  0.220767 |
+| PDA2018-BPR     | 0.385745 | 0.333723 | 0.133685  | 0.221614 | 0.410982 |  0.393123 |
+| PDA2018-NCF     | 0.254681 | 0.23883  | 0.0845477 | 0.150886 | 0.265244 |  0.268098 |
 
 
 #### Comments on the tasks and our results
-- As it can be seen from the tables above the rating prediction task was successful. The implementations here worked well and by tweaking the libraries we obtained great results.
+- As it can be seen from the tables above the rating prediction task was successful. The implementations here worked well and by tweaking the libraries we obtained great results. The Item recommendation task has also produced relatively good results. We managed to drop down the precision and recall to the norms using our own evaluation metrics and Surprise for the model.
 
-- Surely doubt will arise when looking at the item recommendation results from Cornac. The metric values are very low and they might seem wrong, but they actually aren't. It's the Cornac evaluation policy that makes them seem wrong. Actually, we can see from the results in the table that the trends are correct and valid. Precision decreses for greater values of k, Recall increases for greater values of k and BPR is the better approach when it comes to ranking. Here is  [an issue from the official Cornac repository](https://github.com/PreferredAI/cornac/issues/323) that discusses the topic of low metric values. Also [this one](https://github.com/PreferredAI/cornac/issues/324). You can also see in the code that the AUC values for all the models (we used the AUC metric in the code but didn't export it for evaluation) shows good results with BPR-AUC > NCF-AUC > MostPop-AUC. Again, we haven't exported the AUC values in the tables here, but you can see them and how they evolved during training in the [final_notebooks](final_notebooks/)
+- We can see a clear trend in the third table regarding Top-N reccomendations. BPR is clearly the best model and that is what we expect, followed by NCF and then the Most Popular baseline. This is on par with the LibRec evaluation. Please do note that the second and third table have been evaluated slightly differently, hence the difference in the Recall and NDCG. Also they use two different libraries. The lower than ususal NDCG and Recall attributes in the third table are results of the Cornac evaluation policy. You can check out [this issue in their official repository to better understand](https://github.com/PreferredAI/cornac/issues/323). When looking at KNN algorithms with Cornac we got very very low results so we decided to use a variation with Surprise also for the item recommendation task.
 
-
-## Project structure
-There are 4 directories that make up this project:
-
-1. **data**: This directory contains the movielens and PDA data as well as the results of our experiments in csv format
-2. **implementations_from_scratch**: In here you can find our from-scratch implementations of some of the algorithms that we used. It was useful for us to see and understand how the algorithms and recommendation techniques worked on a low level before moving on to using various libraries. The varous implementations include two KNN collaborative filtering algorithms (user and item based), an implementation of Matrix Factorization, Neural Collaborative Filtering and BPR based on Keras:
-3. **notebooks**: This directory contains the code divided by the category of the algorithms that we have used in this project. In each notebook there is a detailed implementation along with evaluation and most importantly **Grid Search** for the bigger models:
-   1. Basic-Algorithms: Code for Random Predictios, User, Item and Global Mean Predictors using [Surprise](https://github.com/NicolasHug/Surprise)
-   2. Bayesian-Personalized-Ranking: Implementation of BPR using [Cornac](https://github.com/PreferredAI/cornac)
-   3. KNNCF-Prediction: Code for KNN Collaborative Filtering algorithms, used for *Rating Prediction*. Implemented using [Surprise](https://github.com/NicolasHug/Surprise)   
-   4. KNNCF-Recommendations: Code for KNN Collaborative Filtering algorithms, used for *Item Recommendation*. Implemented using [Surprise](https://github.com/NicolasHug/Surprise)
-   5. Bayesian-Personalized-Ranking: Implementation of NCF/NeuMF using [Cornac](https://github.com/PreferredAI/cornac)
-   6. SVD: Implementation of SVD, a Matrix Factorization algorithms. Contains also code for SVD++. Implemented using [Surprise](https://github.com/NicolasHug/Surprise)
-4. **final_notebooks**: This directory contains three notebooks, one is just to create the charts you can see in the [images](#images) section and the other two contain the code for running all the different models, based on the task they were created for.
-   1. **Rating-Prediction**: In this notebook you can run and experiment with all the *Rating Prediction* algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another.
-   2. **Item-Recommendation**: In this notebook you can run and experiment with all the *Item Recommendation* algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another.
-
-The code inside the notebooks is well documented and understandable. Because we use two libraries, the evaluation procedures are straightforward and are also done in the same way (with the exception of the KNNCF for Item Recommendation which is not evaluated in Cornac unlike all the other Item Recommendation models).
-
-Here is a visual tree representation of the directories: 
-![alt-text](images/dir_tree.png "Logo Title Text 1")
 
 ## Project requirements
 1. **Performing Grid-Search (points 1.1 and 2.1)**: To see the various Grid Search runs you can check out the single algorithm implementations in the [notebooks](notebooks/) directory. When single-handidly studying the algorithms we performed Grid search for hyperparameter tuning on most of them, while also running cross validation afterwards.
@@ -142,26 +119,3 @@ Here is a visual tree representation of the directories:
 
 
 ## Images
-E.g of a NCF run on Movielens 100K: 
-
-![alt-text](images/ml_ncf_results.png "NCF run")
-
-E.g of a BPR run on Movielens 100K: 
-
-![alt-text](images/ml_bpr_results.png "BPR run")
-
-Precision and Recall graph: BPR vs MostPop: 
-
-![alt-text](images/Precision%20and%20recall.png "BPR vs MostPop precison recall")
-
-![alt-text](images/rmse.png "BPR vs MostPop precison recall")
-
-![alt-text](images/mae.png "BPR vs MostPop precison recall")
-
-![alt-text](images/acc_vs.png "BPR vs MostPop precison recall")
-
-![alt-text](images/prec.png "BPR vs MostPop precison recall")
-
-![alt-text](images/rec.png "BPR vs MostPop precison recall")
-
-![alt-text](images/ndcg.png "BPR vs MostPop precison recall")
