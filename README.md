@@ -15,8 +15,8 @@ Evalutation and usage of various Rating prediction and Item Recommendation algor
     - [KNN Item Recommendation (using Surprise + our evaluation metric functions)](#knn-item-recommendation-using-surprise--our-evaluation-metric-functions)
     - [Item Recommendation (using Cornac + Microsoft reco_utils)](#item-recommendation-using-cornac--microsoft-reco_utils)
       - [Comments on the tasks and our results](#comments-on-the-tasks-and-our-results)
-  - [Project requirements](#project-requirements)
-  - [Images](#images)
+  - [Fullfillment of project requirements](#fullfillment-of-project-requirements)
+  - [Charts](#charts)
 
 ## Getting started
 
@@ -42,18 +42,17 @@ Once the virtual environment is activated you can run any Python command you pre
 You can check examples and other commands you can use with pipenv by simply running `pipenv`.
 
 ## Project structure
-There are 4 directories that make up this project:
+There are 3 main directories that make up this project:
 
-1. **data**: This directory contains the movielens and PDA data as well as the results of our experiments in csv format
-2. **implementations_from_scratch**: In here you can find our from-scratch implementations of some of the algorithms that we used. It was useful for us to see and understand how the algorithms and recommendation techniques worked on a low level before moving on to using various libraries. The varous implementations include two KNN collaborative filtering algorithms (user and item based), an implementation of Matrix Factorization, Neural Collaborative Filtering and BPR based on Keras:
-3. **notebooks**: This directory contains the code divided by the category of the algorithms that we have used in this project. In each notebook there is a detailed implementation along with evaluation and most importantly **Grid Search** for the bigger models:
+1. **implementations_from_scratch**: In here you can find our from-scratch implementations of some of the algorithms that we used. It was useful for us to see and understand how the algorithms and recommendation techniques worked on a low level before moving on to using various libraries. The varous implementations include two KNN collaborative filtering algorithms (user and item based), an implementation of Matrix Factorization, Neural Collaborative Filtering and BPR based on Keras:
+2. **notebooks**: This directory contains the code divided by the category of the algorithms that we have used in this project. In each notebook there is a detailed implementation along with evaluation and most importantly **Grid Search** for the bigger models:
    1. Basic-Algorithms: Code for Random Predictios, User, Item and Global Mean Predictors using [Surprise](https://github.com/NicolasHug/Surprise)
    2. Bayesian-Personalized-Ranking: Implementation of BPR using [Cornac](https://github.com/PreferredAI/cornac)
    3. KNNCF-Prediction: Code for KNN Collaborative Filtering algorithms, used for *Rating Prediction*. Implemented using [Surprise](https://github.com/NicolasHug/Surprise)   
    4. KNNCF-Recommendations: Code for KNN Collaborative Filtering algorithms, used for *Item Recommendation*. Implemented using [Surprise](https://github.com/NicolasHug/Surprise)
    5. Bayesian-Personalized-Ranking: Implementation of NCF/NeuMF using [Cornac](https://github.com/PreferredAI/cornac)
    6. SVD: Implementation of SVD, a Matrix Factorization algorithms. Contains also code for SVD++. Implemented using [Surprise](https://github.com/NicolasHug/Surprise)
-4. **final_notebooks**: This directory contains three notebooks, one is just to create the charts you can see in the [images](#images) section and the other two contain the code for running all the different models, based on the task they were created for.
+3. **final_notebooks**: This directory contains three notebooks, one is just to create the charts you can see in the [images](#images) section and the other two contain the code for running all the different models, based on the task they were created for.
    1. **Rating-Prediction**: In this notebook you can run and experiment with all the *Rating Prediction* algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another.
    2. **KNN-Item-Recommendation-Surprise**: In this notebook you can run and experiment with all KNN Top-N Recommender algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another.
    3. **Item-Recommendation_Cornac**: In this notebook you can run and experiment with all the Item Recommendation except *KNN Recommenders* algorithms. The notebook generates a results table in the end which you can use to see how the various models perform and compare them to one-another. For our final implementations with we also decided to power up Cornac with the very hand [Microsoft Recommender Utilities](https://github.com/microsoft/recommenders/tree/master/reco_utils).
@@ -113,9 +112,19 @@ Below follow the results of our work for this project.
 - We can see a clear trend in the third table regarding Top-N reccomendations. BPR is clearly the best model and that is what we expect, followed by NCF and then the Most Popular baseline. This is on par with the LibRec evaluation. Please do note that the second and third table have been evaluated slightly differently, hence the difference in the Recall and NDCG. Also they use two different libraries. The lower than ususal NDCG and Recall attributes in the third table are results of the Cornac evaluation policy. You can check out [this issue in their official repository to better understand](https://github.com/PreferredAI/cornac/issues/323). When looking at KNN algorithms with Cornac we got very very low results so we decided to use a variation with Surprise also for the item recommendation task.
 
 
-## Project requirements
+## Fullfillment of project requirements
 1. **Performing Grid-Search (points 1.1 and 2.1)**: To see the various Grid Search runs you can check out the single algorithm implementations in the [notebooks](notebooks/) directory. When single-handidly studying the algorithms we performed Grid search for hyperparameter tuning on most of them, while also running cross validation afterwards.
 2. **Results of Prediction and Recommendation (1.2 and 2.2)**: To see the results of the recommender algorithms you can check out the complete implementations in the [final_notebooks](final_notebooks/) directory. They wrap up all the algorithms (divided by purpose as mentioned before) in one place and that's where the results in the two tables from our [Results](#results) table come from.
 
 
-## Images
+## Charts
+
+![alt-text](images/mae.png "MAE of different rating prediction algorithms")
+
+![alt-text](images/ml_pda_rmse.png "RMSE difference between the algorithms on the two datasets")
+
+![alt-text](images/prec.png "Precision values for ML100K")
+
+![alt-text](images/rec.png "Recall values for ML100K")
+
+![alt-text](images/ndcg.png "NDCG values for ML100K")
