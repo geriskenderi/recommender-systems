@@ -13,7 +13,7 @@ Evalutation and usage of various Rating prediction and Item Recommendation algor
   - [Results](#results)
     - [Rating Prediction (using Surprise)](#rating-prediction-using-surprise)
     - [KNN Item Recommendation (using Surprise + our evaluation metric functions)](#knn-item-recommendation-using-surprise--our-evaluation-metric-functions)
-    - [Item Recommendation (using Cornac + Microsoft reco_utils)](#item-recommendation-using-cornac--microsoft-reco_utils)
+    - [Item Recommendation (using Cornac + Microsoft Recommender Utilities)](#item-recommendation-using-cornac--microsoft-recommender-utilities)
       - [Comments on the tasks and our results](#comments-on-the-tasks-and-our-results)
   - [Fullfillment of project requirements](#fullfillment-of-project-requirements)
   - [Charts](#charts)
@@ -89,32 +89,34 @@ Below follow the results of our work for this project.
 
 | Recommender     |    Pre@5 |   Pre@10 |    Rec@5 |   Rec@10 |   NDCG@5 |   NDCG@10 |
 |:----------------|---------:|---------:|---------:|---------:|---------:|----------:|
-| ML100-UserKNN   | 0.353187 | 0.34989  | 0.316283 | 0.463249 | 0.678307 |  0.640064 |
-| ML100-ItemKNN   | 0.341703 | 0.385859 | 0.322389 | 0.515305 | 0.501535 |  0.481618 |
-| PDA2018-UserKNN | 0.345692 | 0.346674 | 0.314428 | 0.463595 | 0.659795 |  0.659795 |
-| PDA2018-ItemKNN | 0.336127 | 0.379209 | 0.312074 | 0.505894 | 0.501431 |  0.490198 |
+| ML100-UserKNN   | 0.335922 | 0.342011 | 0.308369 | 0.454819 | 0.514365 |  0.448701 |
+| ML100-ItemKNN   | 0.331019 | 0.376929 | 0.298958 | 0.495591 | 0.415851 |  0.376731 |
+| PDA2018-UserKNN | 0.334953 | 0.336993 | 0.312055 | 0.45544  | 0.534725 |  0.464452 |
+| PDA2018-ItemKNN | 0.328328 | 0.379933 | 0.296599 | 0.496497 | 0.432044 |  0.391645 |
 
-### Item Recommendation (using Cornac + Microsoft reco_utils)
+### Item Recommendation (using Cornac + Microsoft Recommender Utilities)
 
 | Recommender     |    Pre@5 |   Pre@10 |     Rec@5 |   Rec@10 |   NDCG@5 |   NDCG@10 |
 |:----------------|---------:|---------:|----------:|---------:|---------:|----------:|
 | ML100-MostPop   | 0.21617  | 0.192553 | 0.0706593 | 0.114259 | 0.2305   |  0.220767 |
-| ML100-BPR       | 0.375957 | 0.323298 | 0.119843  | 0.195291 | 0.400388 |  0.378122 |
-| ML100-NCF       | 0.254255 | 0.237234 | 0.0839873 | 0.152258 | 0.269076 |  0.270284 |
+| ML100-BPR       | 0.363362 | 0.309915 | 0.12789   | 0.209184 | 0.389562 |  0.369578 |
+| ML100-NCF       | 0.254    | 0.235766 | 0.0844287 | 0.149687 | 0.265001 |  0.266357 |
 | PDA2018-MostPop | 0.21617  | 0.192553 | 0.0706593 | 0.114259 | 0.2305   |  0.220767 |
-| PDA2018-BPR     | 0.385745 | 0.333723 | 0.133685  | 0.221614 | 0.410982 |  0.393123 |
-| PDA2018-NCF     | 0.254681 | 0.23883  | 0.0845477 | 0.150886 | 0.265244 |  0.268098 |
-
+| PDA2018-BPR     | 0.338213 | 0.288064 | 0.121397  | 0.198045 | 0.361512 |  0.344191 |
+| PDA2018-NCF     | 0.253489 | 0.235872 | 0.0846865 | 0.150544 | 0.259739 |  0.263504 |
 
 #### Comments on the tasks and our results
 - As it can be seen from the tables above the rating prediction task was successful. The implementations here worked well and by tweaking the libraries we obtained great results. The Item recommendation task has also produced relatively good results. We managed to drop down the precision and recall to the norms using our own evaluation metrics and Surprise for the model.
 
-- We can see a clear trend in the third table regarding Top-N reccomendations. BPR is clearly the best model and that is what we expect, followed by NCF and then the Most Popular baseline. This is on par with the LibRec evaluation. Please do note that the second and third table have been evaluated slightly differently, hence the difference in the Recall and NDCG. Also they use two different libraries. The lower than ususal NDCG and Recall attributes in the third table are results of the Cornac evaluation policy. You can check out [this issue in their official repository to better understand](https://github.com/PreferredAI/cornac/issues/323). When looking at KNN algorithms with Cornac we got very very low results so we decided to use a variation with Surprise also for the item recommendation task.
+- We can see a clear trend in the third table regarding Top-N reccomendations. BPR is clearly the best model and that is what we expect, followed by NCF and then the Most Popular baseline. This is on par with the LibRec evaluation. Please do note that the second and third table have been evaluated slightly differently, hence the difference in the Recall and NDCG. We are using two different libraries and that is why we separated the tables. The lower than ususal NDCG and Recall attributes in the third table are results of the Cornac evaluation policy. You can check out [this issue in their official repository to better understand](https://github.com/PreferredAI/cornac/issues/323). When looking at KNN algorithms with Cornac we got very very low results so we decided to use a variation with Surprise also for the item recommendation task.
+
+- As far as improvements and future work, most certainly the first thing to do is to run statistical tests on the results and their differences to see if the improvements we are getting are statistically significant. Even though we have used 5-fold cross validation for all the evaluation and the data does not vary by a lot (means of both datasets are very similar) the results we are getting are probably significant, but still the only way to formally make sure of this is by doing a statistical test. An example of that would be a t-test or even pairwise t-tests to compare the results between models. This is something we could look in in the future.
 
 
 ## Fullfillment of project requirements
 1. **Performing Grid-Search (points 1.1 and 2.1)**: To see the various Grid Search runs you can check out the single algorithm implementations in the [notebooks](notebooks/) directory. When single-handidly studying the algorithms we performed Grid search for hyperparameter tuning on most of them, while also running cross validation afterwards.
 2. **Results of Prediction and Recommendation (1.2 and 2.2)**: To see the results of the recommender algorithms you can check out the complete implementations in the [final_notebooks](final_notebooks/) directory. They wrap up all the algorithms (divided by purpose as mentioned before) in one place and that's where the results in the two tables from our [Results](#results) table come from.
+3. **Extras**: We also tried to implement several algorithms from scratch, using only minimal help from libraries acting as building blocks for our algorithms. We've also added a couple of charts to make the results "visible".
 
 
 ## Charts
@@ -128,3 +130,5 @@ Below follow the results of our work for this project.
 ![alt-text](images/rec.png "Recall values for ML100K")
 
 ![alt-text](images/ndcg.png "NDCG values for ML100K")
+
+![alt-text](images/prec_rec_graph.jpeg "Preciosion Recall graphs for ML100K Top-N Recommenders")
