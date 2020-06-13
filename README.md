@@ -16,6 +16,7 @@ Evalutation and usage of various Rating prediction and Item Recommendation algor
     - [Item Recommendation (using Cornac + Microsoft Recommender Utilities)](#item-recommendation-using-cornac--microsoft-recommender-utilities)
       - [Comments on the tasks and our results](#comments-on-the-tasks-and-our-results)
   - [Fullfillment of project requirements](#fullfillment-of-project-requirements)
+  - [Future Work](#future-work)
   - [Charts](#charts)
 
 ## Getting started
@@ -110,13 +111,15 @@ Below follow the results of our work for this project.
 
 - We can see a clear trend in the third table regarding Top-N reccomendations. BPR is clearly the best model and that is what we expect, followed by NCF and then the Most Popular baseline. This is on par with the LibRec evaluation. Please do note that the second and third table have been evaluated slightly differently, hence the difference in the Recall and NDCG. We are using two different libraries and that is why we separated the tables. The lower than ususal NDCG and Recall attributes in the third table are results of the Cornac evaluation policy. You can check out [this issue in their official repository to better understand](https://github.com/PreferredAI/cornac/issues/323). When looking at KNN algorithms with Cornac we got very very low results so we decided to use a variation with Surprise also for the item recommendation task.
 
-- As far as improvements and future work, most certainly the first thing to do is to run statistical tests on the results and their differences to see if the improvements we are getting are statistically significant. Even though we have used 5-fold cross validation for all the evaluation and the data does not vary by a lot (means of both datasets are very similar) the results we are getting are probably significant, but still the only way to formally make sure of this is by doing a statistical test. An example of that would be a t-test or even pairwise t-tests to compare the results between models. This is something we could look in in the future.
-
 
 ## Fullfillment of project requirements
 1. **Performing Grid-Search (points 1.1 and 2.1)**: To see the various Grid Search runs you can check out the single algorithm implementations in the [notebooks](notebooks/) directory. When single-handidly studying the algorithms we performed Grid search for hyperparameter tuning on most of them, while also running cross validation afterwards.
 2. **Results of Prediction and Recommendation (1.2 and 2.2)**: To see the results of the recommender algorithms you can check out the complete implementations in the [final_notebooks](final_notebooks/) directory. They wrap up all the algorithms (divided by purpose as mentioned before) in one place and that's where the results in the two tables from our [Results](#results) table come from.
 3. **Extras**: We also tried to implement several algorithms from scratch, using only minimal help from libraries acting as building blocks for our algorithms. We've also added a couple of charts to make the results "visible".
+
+## Future Work
+1. **Graph-based implementations**: It would be a great to also try and implement collaborative filtering using graph implementations. We know that we can also compute collaborative filtering exercises using graph methods and that would be a great way to display the power of graph implementations.
+2. **Statistical significance testing**: Even though we have used 5-fold cross validation for all the evaluation and the data does not vary by a lot (means of both datasets are very similar) the results we are getting are probably significant, but still the only way to formally make sure of this is by doing a statistical test. An example of that would be a t-test or even pairwise t-tests to compare the results between models.
 
 
 ## Charts
