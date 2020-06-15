@@ -1,7 +1,5 @@
 # RecSys 2019-2020 Final Project:
-Evalutation and usage of various Rating prediction and Item Recommendation algorithms.
-
-*By Geri Skenderi and Luca Bellinazzi.*
+Evalutation and usage of various Rating prediction and Item Recommendation algorithms from Recommender Systems literature.
 
 ## Table of contents
 - [RecSys 2019-2020 Final Project:](#recsys-2019-2020-final-project)
@@ -15,7 +13,7 @@ Evalutation and usage of various Rating prediction and Item Recommendation algor
     - [KNN Item Recommendation (using Surprise + our evaluation metric functions)](#knn-item-recommendation-using-surprise--our-evaluation-metric-functions)
     - [Item Recommendation (using Cornac + Microsoft Recommender Utilities)](#item-recommendation-using-cornac--microsoft-recommender-utilities)
       - [Comments on the tasks and our results](#comments-on-the-tasks-and-our-results)
-  - [Fullfillment of project requirements](#fullfillment-of-project-requirements)
+  - [Performing Grid-Search](#performing-grid-search)
   - [Future Work](#future-work)
   - [Charts](#charts)
 
@@ -43,7 +41,7 @@ Once the virtual environment is activated you can run any Python command you pre
 You can check examples and other commands you can use with pipenv by simply running `pipenv`.
 
 ## Project structure
-There are 3 main directories that make up this project:
+There are 3 main directories:
 
 1. **implementations_from_scratch**: In here you can find our from-scratch implementations of some of the algorithms that we used. It was useful for us to see and understand how the algorithms and recommendation techniques worked on a low level before moving on to using various libraries. The varous implementations include two KNN collaborative filtering algorithms (user and item based), an implementation of Matrix Factorization, Neural Collaborative Filtering and BPR based on Keras:
 2. **notebooks**: This directory contains the code divided by the category of the algorithms that we have used in this project. In each notebook there is a detailed implementation along with evaluation and most importantly **Grid Search** for the bigger models:
@@ -112,10 +110,8 @@ Below follow the results of our work for this project.
 - We can see a clear trend in the third table regarding Top-N reccomendations. BPR is clearly the best model and that is what we expect, followed by NCF and then the Most Popular baseline. This is on par with the LibRec evaluation. Please do note that the second and third table have been evaluated slightly differently, hence the difference in the Recall and NDCG. We are using two different libraries and that is why we separated the tables. The lower than ususal NDCG and Recall attributes in the third table are results of the Cornac evaluation policy. You can check out [this issue in their official repository to better understand](https://github.com/PreferredAI/cornac/issues/323). When looking at KNN algorithms with Cornac we got very very low results so we decided to use a variation with Surprise also for the item recommendation task.
 
 
-## Fullfillment of project requirements
-1. **Performing Grid-Search (points 1.1 and 2.1)**: To see the various Grid Search runs you can check out the single algorithm implementations in the [notebooks](notebooks/) directory. When single-handidly studying the algorithms we performed Grid search for hyperparameter tuning on most of them, while also running cross validation afterwards.
-2. **Results of Prediction and Recommendation (1.2 and 2.2)**: To see the results of the recommender algorithms you can check out the complete implementations in the [final_notebooks](final_notebooks/) directory. They wrap up all the algorithms (divided by purpose as mentioned before) in one place and that's where the results in the two tables from our [Results](#results) table come from.
-3. **Extras**: We also tried to implement several algorithms from scratch, using only minimal help from libraries acting as building blocks for our algorithms. We've also added a couple of charts to make the results "visible".
+## Performing Grid-Search
+To see the various Grid Search runs you can check out the single algorithm implementations in the [notebooks](notebooks/) directory. When single-handidly studying the algorithms we performed Grid search for hyperparameter tuning on most of them, while also running cross validation afterwards.
 
 ## Future Work
 1. **Graph-based implementations**: It would be a great to also try and implement collaborative filtering using graph implementations. We know that we can also compute collaborative filtering exercises using graph methods and that would be a great way to display the power of graph implementations.
