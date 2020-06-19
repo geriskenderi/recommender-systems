@@ -1,5 +1,5 @@
-# RecSys 2019-2020 Final Project:
-Evalutation and usage of various Rating prediction and Item Recommendation algorithms from Recommender Systems literature.
+# Various Recommenders:
+Evalutation and usage of several rating prediction and top-n item recommendation algorithms from recommender systems literature.
 
 ## Table of contents
 - [RecSys 2019-2020 Final Project:](#recsys-2019-2020-final-project)
