@@ -59,8 +59,8 @@ There are 3 main directories:
 The code inside the notebooks is well documented and understandable. The use of libraries allowed us to perform the evaluation procedures in the same place for the different classes of algorithms (with the exception of the KNNCF for Item Recommendation which is not implemented and evaluated with Cornac unlike the other Item Recommendation models).
 
 ## Results
-We have denoted the movielens dataset as ML100 and the PDA dataset as PDA2018.
-Below follow the results of our work for this project. 
+This project uses the famous Movielens100K dataset, denoted as ML100. You can download it [here](https://grouplens.org/datasets/movielens/100k/)
+Below follow the results of this project. 
 
 ### Rating Prediction (using Surprise)
    
@@ -74,14 +74,6 @@ Below follow the results of our work for this project.
 | ML100-ItemKNN      | 0.922 | 0.721 | 0.924        | 0.723        |
 | ML100-SVD          | 0.959 | 0.761 | 0.936        | 0.730        |
 | ML100-SVDpp        | 0.924 | 0.720 | 0.912        | 0.718        |
-| PDA2018-Random     | 1.481 | 1.185 | -            | -            |
-| PDA2018-GlobalMean | 1.100 | 0.911 | -            | -            |
-| PDA2018-UserMean   | 1.024 | 0.814 | -            | -            |
-| PDA2018-ItemMean   | 1.204 | 0.979 | -            | -            |
-| PDA2018-UserKNN    | 0.895 | 0.698 | -            | -            |
-| PDA2018-ItemKNN    | 0.871 | 0.680 | -            | -            |
-| PDA2018-SVD        | 0.908 | 0.717 | -            | -            |
-| PDA2018-SVDpp      | 0.873 | 0.677 | -            | -            |
 
 
 ### KNN Item Recommendation (using Surprise + our evaluation metric functions)
@@ -90,8 +82,6 @@ Below follow the results of our work for this project.
 |:----------------|---------:|---------:|---------:|---------:|---------:|----------:|
 | ML100-UserKNN   | 0.335922 | 0.342011 | 0.308369 | 0.454819 | 0.514365 |  0.448701 |
 | ML100-ItemKNN   | 0.331019 | 0.376929 | 0.298958 | 0.495591 | 0.415851 |  0.376731 |
-| PDA2018-UserKNN | 0.334953 | 0.336993 | 0.312055 | 0.45544  | 0.534725 |  0.464452 |
-| PDA2018-ItemKNN | 0.328328 | 0.379933 | 0.296599 | 0.496497 | 0.432044 |  0.391645 |
 
 ### Item Recommendation (using Cornac + Microsoft Recommender Utilities)
 
@@ -100,9 +90,6 @@ Below follow the results of our work for this project.
 | ML100-MostPop   | 0.21617  | 0.192553 | 0.0706593 | 0.114259 | 0.2305   |  0.220767 |
 | ML100-BPR       | 0.363362 | 0.309915 | 0.12789   | 0.209184 | 0.389562 |  0.369578 |
 | ML100-NCF       | 0.254    | 0.235766 | 0.0844287 | 0.149687 | 0.265001 |  0.266357 |
-| PDA2018-MostPop | 0.21617  | 0.192553 | 0.0706593 | 0.114259 | 0.2305   |  0.220767 |
-| PDA2018-BPR     | 0.338213 | 0.288064 | 0.121397  | 0.198045 | 0.361512 |  0.344191 |
-| PDA2018-NCF     | 0.253489 | 0.235872 | 0.0846865 | 0.150544 | 0.259739 |  0.263504 |
 
 #### Comments on the tasks and our results
 - As it can be seen from the tables above the rating prediction task was successful. The implementations here worked well and by tweaking the libraries we obtained great results. The Item recommendation task has also produced relatively good results. We managed to drop down the precision and recall to the norms using our own evaluation metrics and Surprise for the model.
@@ -122,12 +109,10 @@ To see the various Grid Search runs you can check out the single algorithm imple
 
 ![alt-text](images/mae.png "MAE of different rating prediction algorithms")
 
-![alt-text](images/ml_pda_rmse.png "RMSE difference between the algorithms on the two datasets")
+![alt-text](images/prec.png "Precision values")
 
-![alt-text](images/prec.png "Precision values for ML100K")
+![alt-text](images/rec.png "Recall values")
 
-![alt-text](images/rec.png "Recall values for ML100K")
+![alt-text](images/ndcg.png "NDCG values")
 
-![alt-text](images/ndcg.png "NDCG values for ML100K")
-
-![alt-text](images/prec_rec_graph.jpeg "Preciosion Recall graphs for ML100K Top-N Recommenders")
+![alt-text](images/prec_rec_graph.jpeg "Preciosion Recall graph")
