@@ -2,7 +2,7 @@
 Evalutation and usage of several rating prediction and top-n item recommendation algorithms from recommender systems literature.
 
 ## Table of contents
-- [RecSys 2019-2020 Final Project:](#recsys-2019-2020-final-project)
+- [Various Recommenders:](#various-recommenders)
   - [Table of contents](#table-of-contents)
   - [Getting started](#getting-started)
     - [Prerequisites](#prerequisites)
@@ -59,7 +59,7 @@ There are 3 main directories:
 The code inside the notebooks is well documented and understandable. The use of libraries allowed us to perform the evaluation procedures in the same place for the different classes of algorithms (with the exception of the KNNCF for Item Recommendation which is not implemented and evaluated with Cornac unlike the other Item Recommendation models).
 
 ## Results
-This project uses the famous Movielens100K dataset, denoted as ML100. You can download it [here](https://grouplens.org/datasets/movielens/100k/)
+This project uses the famous Movielens100K dataset, denoted as ML100. You can download it [here](https://grouplens.org/datasets/movielens/100k/) or just use the u.data file that is located inside the [data directory](data/)
 Below follow the results of this project. 
 
 ### Rating Prediction (using Surprise)
